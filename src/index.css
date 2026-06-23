@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: "Inter", ui-sans-serif, system-ui, sans-serif; }
+
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulseDot { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit, .floaty, .pdot, .marquee { animation: none !important; }
+}
