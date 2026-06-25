@@ -3,8 +3,19 @@ import Wordmark from "./Wordmark.jsx";
 
 const COLS = [
   { h: "Company", items: [["About", "/about"], ["Services", "/services"], ["Careers", "/contact"]] },
-  { h: "Services", items: [["Brand", "/services"], ["Web", "/services"], ["Product", "/services"], ["Motion", "/services"]] },
-  { h: "Connect", items: [["Contact", "/contact"], ["LinkedIn", "/contact"], ["Instagram", "/contact"]] },
+  { h: "Services", items: [
+      ["Brand", "/services#brand"],
+      ["Web", "/services#web"],
+      ["Product", "/services#product"],
+      ["Motion", "/services#motion"]
+    ]
+  },
+  { h: "Connect", items: [
+      ["Contact", "/contact"],
+      ["LinkedIn", "https://www.linkedin.com/company/pskyro-labs/"],
+      ["Instagram", "https://www.instagram.com/pskyrolabs?igsh=djMwZWV0N3dkbncw"]
+    ]
+  },
 ];
 
 export default function Footer() {
@@ -21,9 +32,27 @@ export default function Footer() {
               <div key={col.h}>
                 <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/40">{col.h}</p>
                 <ul className="mt-4 space-y-3 text-[14px] text-white/70">
-                  {col.items.map(([it, to]) => (
-                    <li key={it}><Link to={to} className="transition-colors hover:text-launch">{it}</Link></li>
-                  ))}
+                  {col.items.map(([it, to]) => {
+                    const isExternal = to.startsWith("http");
+                    return (
+                      <li key={it}>
+                        {isExternal ? (
+                          <a
+                            href={to}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-colors hover:text-launch"
+                          >
+                            {it}
+                          </a>
+                        ) : (
+                          <Link to={to} className="transition-colors hover:text-launch">
+                            {it}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
@@ -31,7 +60,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-[12px] text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} pSkyro Labs. A design &amp; technology company.</span>
-          <span>Gwalior, India</span>
+          <span>Bhopal, India</span>
         </div>
       </div>
     </footer>

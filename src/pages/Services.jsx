@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { ArrowUpRight, Plus, Minus } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
 import CTA from "../components/CTA.jsx";
@@ -12,9 +13,9 @@ const SERVICES = [
   { k: "06", t: "AI & Automation", d: "Practical AI woven into the products you actually ship.", items: ["Generative AI features", "LLM integration", "Agentic workflows", "Process automation"] },
 ];
 
-function ServiceRow({ s, open, onToggle }) {
+function ServiceRow({ s, open, onToggle, id }) {
   return (
-    <div className="border-t border-black/10 last:border-b">
+    <div id={id} className="border-t border-black/10 last:border-b scroll-mt-24">
       <button onClick={onToggle} className="group flex w-full items-center gap-4 py-6 sm:py-8 text-left">
         <span className="font-semibold text-skyro tabular-nums" style={{ fontSize: "clamp(14px,1.3vw,18px)" }}>{s.k}</span>
         <h3 className="flex-1 font-semibold tracking-tight transition-colors group-hover:text-skyro" style={{ fontSize: "clamp(22px,3vw,42px)" }}>{s.t}</h3>
@@ -32,6 +33,39 @@ function ServiceRow({ s, open, onToggle }) {
 
 export default function Services() {
   const [open, setOpen] = useState(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      const mapping = {
+        "#brand": 0,
+        "#web": 1,
+        "#product": 2,
+        "#motion": 4,
+      };
+      const index = mapping[hash.toLowerCase()];
+      if (index !== undefined) {
+        setOpen(index);
+        setTimeout(() => {
+          const element = document.getElementById(hash.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  const serviceIds = {
+    "01": "brand",
+    "02": "web",
+    "03": "product",
+    "04": "app",
+    "05": "motion",
+    "06": "ai"
+  };
+
   return (
     <>
       {/* HERO */}
@@ -63,7 +97,16 @@ export default function Services() {
       {/* SERVICES ACCORDION */}
       <section className="mx-auto max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 pt-12 sm:pt-16 lg:pt-20">
         <div>
-          {SERVICES.map((s, i) => (<Reveal key={s.k} delay={i * 60}><ServiceRow s={s} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} /></Reveal>))}
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.k} delay={i * 60}>
+              <ServiceRow
+                s={s}
+                id={serviceIds[s.k]}
+                open={open === i}
+                onToggle={() => setOpen(open === i ? -1 : i)}
+              />
+            </Reveal>
+          ))}
         </div>
       </section>
 

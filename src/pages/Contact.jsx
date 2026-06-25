@@ -69,11 +69,24 @@ export default function Contact() {
               </a>
               <div className="flex items-center gap-4">
                 <span className="grid h-11 w-11 place-items-center rounded-full border border-black/15"><MapPin size={18} /></span>
-                <span><span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Based in</span><span className="text-[15px] font-medium">Gwalior, India</span></span>
+                <span><span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Based in</span><span className="text-[15px] font-medium">Bhopal, India</span></span>
               </div>
             </div>
             <div className="flex gap-3">
-              {["LinkedIn", "Instagram"].map((s) => (<a key={s} href="#" className="rounded-full border border-black/15 px-5 py-2 text-[13px] font-medium transition-all hover:bg-black hover:text-white hover:border-black">{s}</a>))}
+              {[
+                { name: "LinkedIn", url: "https://www.linkedin.com/company/pskyro-labs/" },
+                { name: "Instagram", url: "https://www.instagram.com/pskyrolabs?igsh=djMwZWV0N3dkbncw" }
+              ].map((s) => (
+                <a
+                  key={s.name}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-black/15 px-5 py-2 text-[13px] font-medium transition-all hover:bg-black hover:text-white hover:border-black"
+                >
+                  {s.name}
+                </a>
+              ))}
             </div>
           </Reveal>
 
