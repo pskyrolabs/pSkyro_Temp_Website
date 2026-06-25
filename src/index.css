@@ -9,7 +9,23 @@ body { margin: 0; font-family: "Inter", ui-sans-serif, system-ui, sans-serif; }
 @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes pulseDot { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.25); } }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes modalEnter {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes backdropEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-modal-enter {
+  animation: modalEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-backdrop-enter {
+  animation: backdropEnter 0.25s ease-out forwards;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .orbit, .floaty, .pdot, .marquee { animation: none !important; }
+  .orbit, .floaty, .pdot, .marquee, .animate-modal-enter, .animate-backdrop-enter { animation: none !important; }
 }
+

@@ -63,13 +63,29 @@ export default function Contact() {
               <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-black/60">Whether it's a brand, a product, or a full launch — send a few details and we'll get back with next steps.</p>
             </div>
             <div className="flex flex-col gap-5">
-              <a href="mailto:hello@pskyro.labs" className="group flex items-center gap-4">
+              <a href="mailto:hello@pskyrolabs.com" className="group flex items-center gap-4">
                 <span className="grid h-11 w-11 place-items-center rounded-full border border-black/15 transition-all group-hover:bg-skyro group-hover:text-white group-hover:border-skyro"><Mail size={18} /></span>
-                <span><span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Email</span><span className="text-[15px] font-medium">hello@pskyro.labs</span></span>
+                <span><span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Email</span><span className="text-[15px] font-medium">hello@pskyrolabs.com</span></span>
               </a>
-              <div className="flex items-center gap-4">
-                <span className="grid h-11 w-11 place-items-center rounded-full border border-black/15"><MapPin size={18} /></span>
-                <span><span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Based in</span><span className="text-[15px] font-medium">Bhopal, India</span></span>
+              <div className="flex items-start gap-4">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-black/15"><MapPin size={18} /></span>
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Head Office</span>
+                    <span className="text-[14px] font-medium text-black/85 block mt-1">
+                      D-109, Chhatrapati Nagar, Narela Shankari,<br />
+                      Ayodhya Bypass Road, Bhopal,<br />
+                      Madhya Pradesh – 462023, India.
+                    </span>
+                  </div>
+                  <div>
+                    <span className="block text-[11px] uppercase tracking-[0.16em] text-black/40">Operational Location</span>
+                    <span className="text-[14px] font-medium text-black/85 block mt-1">
+                      Near Patidar Pump House, Shastri Ward,<br />
+                      Pandhurna, Madhya Pradesh – 480334, India.
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="flex gap-3">
@@ -91,44 +107,88 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            {sent ? (
-              <div className="flex h-full min-h-[340px] flex-col items-start justify-center gap-5 rounded-2xl lg:rounded-[26px] border border-black/10 p-8 lg:p-12">
-                <span className="grid h-14 w-14 place-items-center rounded-full bg-skyro text-white"><Check size={26} /></span>
-                <h3 className="font-semibold tracking-tight" style={{ fontSize: "clamp(24px,2.6vw,34px)" }}>Thanks, {f.name.split(" ")[0] || "there"} — message received.</h3>
-                <p className="max-w-md text-[15px] leading-relaxed text-black/60">We've got your enquiry and will reply to {f.email} within 1&ndash;2 business days.</p>
-                <button onClick={() => { setSent(false); setF({ name: "", email: "", company: "", type: "", budget: "", message: "" }); }} className="mt-2 inline-flex items-center gap-2 rounded-full bg-launch px-6 py-3 text-[14px] font-semibold text-black transition-all hover:gap-3">Send another <ArrowUpRight size={16} /></button>
+            <form onSubmit={submit} className="flex flex-col gap-5 rounded-2xl lg:rounded-[26px] border border-black/10 p-6 sm:p-8 lg:p-10">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field label="Name *" error={errors.name}><input className={inputCls} value={f.name} onChange={set("name")} placeholder="Your name" /></Field>
+                <Field label="Email *" error={errors.email}><input className={inputCls} value={f.email} onChange={set("email")} placeholder="you@company.com" /></Field>
               </div>
-            ) : (
-              <form onSubmit={submit} className="flex flex-col gap-5 rounded-2xl lg:rounded-[26px] border border-black/10 p-6 sm:p-8 lg:p-10">
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Field label="Name *" error={errors.name}><input className={inputCls} value={f.name} onChange={set("name")} placeholder="Your name" /></Field>
-                  <Field label="Email *" error={errors.email}><input className={inputCls} value={f.email} onChange={set("email")} placeholder="you@company.com" /></Field>
+              <Field label="Company"><input className={inputCls} value={f.company} onChange={set("company")} placeholder="Optional" /></Field>
+
+              <Field label="What do you need?">
+                <div className="flex flex-wrap gap-2">
+                  {PROJECT_TYPES.map((t) => (<button type="button" key={t} onClick={() => setF((p) => ({ ...p, type: p.type === t ? "" : t }))} className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-all ${f.type === t ? "border-skyro bg-skyro text-white" : "border-black/15 text-black/70 hover:border-black/40"}`}>{t}</button>))}
                 </div>
-                <Field label="Company"><input className={inputCls} value={f.company} onChange={set("company")} placeholder="Optional" /></Field>
+              </Field>
 
-                <Field label="What do you need?">
-                  <div className="flex flex-wrap gap-2">
-                    {PROJECT_TYPES.map((t) => (<button type="button" key={t} onClick={() => setF((p) => ({ ...p, type: p.type === t ? "" : t }))} className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-all ${f.type === t ? "border-skyro bg-skyro text-white" : "border-black/15 text-black/70 hover:border-black/40"}`}>{t}</button>))}
-                  </div>
-                </Field>
+              <Field label="Budget">
+                <div className="flex flex-wrap gap-2">
+                  {BUDGETS.map((b) => (<button type="button" key={b} onClick={() => setF((p) => ({ ...p, budget: p.budget === b ? "" : b }))} className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-all ${f.budget === b ? "border-black bg-black text-white" : "border-black/15 text-black/70 hover:border-black/40"}`}>{b}</button>))}
+                </div>
+              </Field>
 
-                <Field label="Budget">
-                  <div className="flex flex-wrap gap-2">
-                    {BUDGETS.map((b) => (<button type="button" key={b} onClick={() => setF((p) => ({ ...p, budget: p.budget === b ? "" : b }))} className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-all ${f.budget === b ? "border-black bg-black text-white" : "border-black/15 text-black/70 hover:border-black/40"}`}>{b}</button>))}
-                  </div>
-                </Field>
+              <Field label="Project details *" error={errors.message}><textarea rows={4} className={`${inputCls} resize-none`} value={f.message} onChange={set("message")} placeholder="A few lines about what you're building, timelines, and goals." /></Field>
 
-                <Field label="Project details *" error={errors.message}><textarea rows={4} className={`${inputCls} resize-none`} value={f.message} onChange={set("message")} placeholder="A few lines about what you're building, timelines, and goals." /></Field>
-
-                <button type="submit" className="group mt-1 inline-flex w-fit items-center gap-3 rounded-full bg-black px-8 py-4 text-[15px] font-semibold text-white transition-all hover:bg-skyro">
-                  Send enquiry
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-launch text-black transition-transform group-hover:rotate-45"><ArrowUpRight size={16} /></span>
-                </button>
-              </form>
-            )}
+              <button type="submit" className="group mt-1 inline-flex w-fit items-center gap-3 rounded-full bg-black px-8 py-4 text-[15px] font-semibold text-white transition-all hover:bg-skyro">
+                Send enquiry
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-launch text-black transition-transform group-hover:rotate-45"><ArrowUpRight size={16} /></span>
+              </button>
+            </form>
           </Reveal>
         </div>
       </section>
+
+      {/* SUCCESS MODAL POPUP */}
+      {sent && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* Backdrop overlay */}
+          <div 
+            className="absolute inset-0 bg-black/45 backdrop-blur-sm animate-backdrop-enter"
+            onClick={() => { setSent(false); setF({ name: "", email: "", company: "", type: "", budget: "", message: "" }); }}
+          />
+          
+          {/* Modal card */}
+          <div className="relative w-full max-w-md transform rounded-[28px] bg-white p-7 sm:p-9 shadow-2xl border border-black/[0.05] animate-modal-enter flex flex-col items-center text-center">
+            
+            {/* Success Icon */}
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#2400C2]/10 text-skyro mb-5">
+              <Check size={28} strokeWidth={2.5} />
+            </div>
+
+            {/* Heading */}
+            <h3 className="text-2xl sm:text-3xl font-bold text-black tracking-tight leading-tight">
+              Thank you, {f.name.split(" ")[0]}!
+            </h3>
+
+            {/* Subheading */}
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-skyro">
+              Enquiry Received
+            </p>
+
+            {/* Content */}
+            <p className="mt-4 text-[14px] leading-relaxed text-black/60">
+              We've successfully received your details. Our team at <strong>pSkyro Labs</strong> is excited about your project and we are already reviewing it!
+            </p>
+            
+            <div className="mt-4 w-full bg-black/[0.02] border border-black/[0.05] rounded-xl p-3.5 text-[13px] text-black/50 text-left space-y-1">
+              <p><strong>Email:</strong> {f.email}</p>
+              {f.company && <p><strong>Company:</strong> {f.company}</p>}
+              {f.type && <p><strong>Project:</strong> {f.type}</p>}
+            </div>
+
+            <p className="mt-4 text-[13px] leading-normal text-black/45">
+              We will get back to you with next steps at your email address within <strong>1–2 business days</strong>.
+            </p>
+
+            {/* Close Button */}
+            <button
+              onClick={() => { setSent(false); setF({ name: "", email: "", company: "", type: "", budget: "", message: "" }); }}
+              className="mt-6 w-full rounded-full bg-black text-white py-3.5 text-[14px] font-semibold transition-all hover:bg-skyro hover:shadow-[0_8px_25px_rgba(36,0,194,0.25)]"
+            >
+              Awesome, Got It!
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -24,9 +24,9 @@ export default function Nav() {
     <>
       <header className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-md border-b border-black/[0.06]">
       <div className="mx-auto flex h-16 sm:h-[72px] max-w-site 2xl:max-w-site-wide items-center justify-between px-4 sm:px-6 lg:px-10">
-        <Link to="/" className="flex items-baseline gap-1" onClick={() => setOpen(false)}>
+        <Link to="/" className="flex items-center gap-1" onClick={() => setOpen(false)}>
           <Wordmark />
-          <span className="text-black/40 text-[10px] font-medium translate-y-[-6px]">®</span>
+          <span className="text-black/40 text-[10px] font-medium translate-y-[-4px]"></span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-9 text-[14px] font-medium text-black/70">
