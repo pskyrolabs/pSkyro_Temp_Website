@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import Wordmark from "./Wordmark.jsx";
 
 const COLS = [
-  { h: "Company", items: [["About", "/about"], ["Services", "/services"], ["Careers", "/contact"]] },
+  // CHANGED "/contact" to "/careers" under Careers
+  { h: "Company", items: [["About", "/about"], ["Services", "/services"], ["Careers", "/careers"]] }, 
   { h: "Services", items: [
       ["Brand", "/services#brand"],
       ["Web", "/services#web"],
