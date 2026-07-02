@@ -21,7 +21,7 @@ const COLS = [
 
 export default function Footer() {
   return (
-    <footer className="mx-auto mt-20 sm:mt-28 lg:mt-36 max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 pb-10">
+    <footer className="mx-auto mt-10 sm:mt-14 lg:mt-16 max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 pb-10">
       <div className="rounded-[20px] sm:rounded-[28px] lg:rounded-[34px] bg-black px-6 sm:px-10 lg:px-14 py-10 sm:py-14 text-white">
         <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
           <div className="max-w-sm">

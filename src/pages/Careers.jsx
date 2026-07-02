@@ -166,12 +166,12 @@ export default function Careers() {
           style={{ background: "radial-gradient(120% 90% at 18% 8%, #5a45ff 0%, #3411e3 28%, #2209be 55%, #140596 78%, #0e036e 100%)" }}
         >
           <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(55% 50% at 88% 18%, rgba(120,90,255,.3) 0%, transparent 60%)" }} />
-          <div className="relative flex min-h-[52vh] flex-col justify-between px-5 sm:px-8 lg:px-12 py-7 sm:py-10 lg:py-14">
+          <div className="relative flex min-h-[44vh] flex-col justify-between px-5 sm:px-8 lg:px-12 py-6 sm:py-8 lg:py-10">
             <p className="text-[11px] sm:text-xs font-medium uppercase tracking-[0.18em] text-white/55">Careers</p>
-            <Reveal className="max-w-[25ch] py-8 sm:py-10">
+            <Reveal className="max-w-[40ch] py-5 sm:py-6">
               <h1 className="font-semibold leading-[0.92] tracking-[-0.025em]" style={{ fontSize: "clamp(34px,5.6vw,92px)" }}>
-                <span className="text-white">Build your</span><br />
-                <span className="text-white/40">future with us.</span>
+                <span className="text-white">Build your</span>
+                <span className="text-white/40"> future with us.</span>
               </h1>
             </Reveal>
             <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-[12px] sm:text-[13px] font-medium text-white/85 ring-1 ring-white/15">
@@ -182,10 +182,10 @@ export default function Careers() {
       </section>
 
       {/* WHY JOIN US INFO & OPEN POSITIONS */}
-      <section className="mx-auto max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 pt-16 sm:pt-24 lg:pt-28">
+      <section className="mx-auto max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 pt-10 sm:pt-16 lg:pt-20">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           
-          <Reveal className="flex flex-col gap-8">
+          <Reveal className="flex flex-col gap-7">
             <div>
               <h2 className="font-semibold leading-[1.1] tracking-[-0.02em]" style={{ fontSize: "clamp(24px,2.6vw,38px)" }}>
                 Kickstart your<br />tech journey.
@@ -195,7 +195,7 @@ export default function Careers() {
               </p>
             </div>
             
-            <div className="flex flex-col gap-6 rounded-2xl bg-black/[0.03] p-6 border border-black/[0.05]">
+            <div className="flex flex-col gap-5 rounded-2xl bg-black/[0.03] p-5 border border-black/[0.05]">
               <div className="flex items-start gap-4">
                 <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-skyro/10 text-skyro"><Briefcase size={16} /></span>
                 <div>
@@ -221,13 +221,13 @@ export default function Careers() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="flex flex-col gap-4">
-              <h3 className="text-[12px] font-semibold uppercase tracking-[0.16em] text-black/40 mb-2">Open Positions</h3>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-[12px] font-semibold uppercase tracking-[0.16em] text-black/40 mb-1">Open Positions</h3>
               
               {POSITIONS.map((pos, idx) => (
                 <div 
                   key={idx} 
-                  className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-[20px] border border-black/10 bg-white p-6 transition-all hover:border-skyro/30 hover:shadow-[0_8px_30px_rgba(36,0,194,0.06)]"
+                  className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-5 rounded-[20px] border border-black/10 bg-white p-5 transition-all hover:border-skyro/30 hover:shadow-[0_8px_30px_rgba(36,0,194,0.06)]"
                 >
                   <div className="flex-1">
                     <h4 className="text-[18px] sm:text-[20px] font-bold text-black group-hover:text-skyro transition-colors">
@@ -256,18 +256,18 @@ export default function Careers() {
       </section>
 
       {/* BOTTOM CTA */}
-      <section className="mx-auto max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
+      <section className="mx-auto max-w-site 2xl:max-w-site-wide px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10 lg:pt-12 pb-0">
         <Reveal>
-          <div className="flex flex-col items-center justify-center text-center rounded-[24px] sm:rounded-[32px] bg-black/[0.03] border border-black/[0.05] py-16 sm:py-24 px-6">
+          <div className="flex flex-col items-center justify-center text-center rounded-[24px] sm:rounded-[32px] bg-black/[0.03] border border-black/[0.05] py-8 sm:py-10 px-5">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black">
               Ready to create an impact?
             </h2>
-            <p className="mt-4 max-w-lg text-[15px] sm:text-[16px] text-black/60">
+            <p className="mt-3.5 max-w-lg text-[15px] sm:text-[16px] text-black/60">
               Submit your application today. Our engineering and design teams review applications on a rolling basis.
             </p>
             <button 
               onClick={() => openModal()}
-              className="group mt-8 inline-flex items-center gap-3 rounded-full bg-black px-8 py-4 text-[15px] font-semibold text-white transition-all hover:bg-skyro"
+              className="group mt-6 inline-flex items-center gap-3 rounded-full bg-black px-8 py-4 text-[15px] font-semibold text-white transition-all hover:bg-skyro"
             >
               Fill Application Form
               <span className="grid h-7 w-7 place-items-center rounded-full bg-launch text-black transition-transform group-hover:rotate-45">
